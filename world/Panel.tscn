@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+
+[node name="Panel" type="Node2D"]
+
+[node name="MainScreenContainer" type="ViewportContainer" parent="."]
+margin_left = 12.0
+margin_top = 9.0
+margin_right = 659.0
+margin_bottom = 443.0
+stretch = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="MainScreen" type="Viewport" parent="MainScreenContainer"]
+size = Vector2( 647, 434 )
+
+[node name="ScreenBg" type="TextureRect" parent="MainScreenContainer/MainScreen"]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 1 )
+stretch_mode = 2

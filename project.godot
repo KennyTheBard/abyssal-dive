@@ -18,6 +18,10 @@ _global_script_class_icons={
 config/name="nautilus"
 config/icon="res://icon.png"
 
+[autoload]
+
+init="*res://autoload/init.gd"
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"
