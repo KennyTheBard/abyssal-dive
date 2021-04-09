@@ -4,22 +4,33 @@
 
 [node name="Panel" type="Node2D"]
 
-[node name="MainScreenContainer" type="ViewportContainer" parent="."]
-margin_left = 12.0
-margin_top = 9.0
-margin_right = 659.0
-margin_bottom = 443.0
-stretch = true
+[node name="MainScreen" type="Control" parent="."]
+margin_left = 14.9641
+margin_top = 10.883
+margin_right = 651.964
+margin_bottom = 439.883
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="MainScreen" type="Viewport" parent="MainScreenContainer"]
-size = Vector2( 647, 434 )
+[node name="MSContainer" type="ViewportContainer" parent="MainScreen"]
+margin_left = 2.54626
+margin_top = 1.25275
+margin_right = 649.546
+margin_bottom = 435.253
+stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="ScreenBg" type="TextureRect" parent="MainScreenContainer/MainScreen"]
-margin_right = 40.0
-margin_bottom = 40.0
+[node name="MainScreen" type="Viewport" parent="MainScreen/MSContainer"]
+size = Vector2( 647, 434 )
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="ScreenBg" type="TextureRect" parent="MainScreen/MSContainer/MainScreen"]
+margin_right = 647.0
+margin_bottom = 434.0
 texture = ExtResource( 1 )
+expand = true
 stretch_mode = 2
