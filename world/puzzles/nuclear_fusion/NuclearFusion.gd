@@ -36,8 +36,31 @@ func init_grid():
 		for j in height:
 			var rand = floor(rand_range(0, pieces.size()))
 			var piece = pieces[rand].instance()
+			
+			if match_at(i, j, piece.elementName):
+				print(i, j, piece.elementName)
+			
+			while match_at(i, j, piece.elementName):
+				rand = int(rand + 1) % pieces.size()
+				piece = pieces[rand].instance()
+			
 			add_child(piece)
 			piece.position = grid_to_pixel(i, j)
+			all_pieces[i][j] = piece
+
+
+func match_at(i, j, element):
+	if i > 1:
+		if all_pieces[i-1][j] != null && all_pieces[i-2][j] != null:
+			if all_pieces[i-1][j].elementName == element && all_pieces[i-2][j].elementName == element:
+				return true
+				
+	if j > 1:
+		if all_pieces[i][j-1] != null && all_pieces[i][j-2] != null:
+			if all_pieces[i][j-1].elementName == element && all_pieces[i][j-2].elementName == element:
+				return true
+	
+	return false
 
 
 func grid_to_pixel(column, row) -> Vector2:
