@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://world/puzzles/nuclear_fusion/NuclearFusion.gd" type="Script" id=1]
+[ext_resource path="res://world/puzzles/nuclear_fusion/atoms/SelectedBorder.tscn" type="PackedScene" id=2]
 
 [node name="NuclearFusion" type="Node2D"]
 script = ExtResource( 1 )
@@ -9,3 +10,10 @@ height = 8
 x_start = 80
 y_start = 600
 offset = 70
+
+[node name="Board" type="Node2D" parent="."]
+
+[node name="SelectedBorder" parent="." instance=ExtResource( 2 )]
+
+[node name="SwapTimer" type="Timer" parent="."]
+one_shot = true
