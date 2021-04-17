@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://world/puzzles/cooling_system/CoolingSystem.gd" type="Script" id=2]
+
+[node name="CoolingSystem" type="Node2D"]
+script = ExtResource( 2 )
+width = 12
+height = 10
+x_start = 100
+y_start = 600
+offset = 64
+
+[node name="PipeContainer" type="Node2D" parent="."]
