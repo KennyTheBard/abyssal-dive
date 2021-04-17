@@ -8,11 +8,12 @@ export (int) var offset;
 
 export (float) var swap_time = 0.25
 export (float) var fall_time = 0.5
-export (float) var fall_delay = 0.25
+export (float) var fall_delay = 0.1
 
 onready var board = $Board
 onready var selected_border = $SelectedBorder
 onready var swap_timer: Timer = $SwapTimer
+onready var fall_timer: Timer = $FallTimer
 
 var pieces = [
 	preload("res://world/puzzles/nuclear_fusion/atoms/Francium.tscn"),
@@ -28,13 +29,16 @@ var all_pieces = []
 var selection = null setget set_selection
 var swap_first = null
 var swap_last = null
-
+var swapping : bool = false
+var falling : bool = false
 
 func _ready():
 	all_pieces = make_2d_array()
 	init_grid()
 	selected_border.visible = false
+	
 	swap_timer.connect("timeout", self, "_on_SwapTimer_timeout")
+	fall_timer.connect("timeout", self, "_on_FallTimer_timeout")
 
 
 func make_2d_array():
@@ -95,6 +99,7 @@ func swap_pieces(first: Vector2, second: Vector2, start_timer: bool = true):
 	
 	if start_timer:
 		swap_timer.start(swap_time)
+		swapping = true
 	
 	var aux_piece = all_pieces[first.x][first.y]
 	all_pieces[first.x][first.y] = all_pieces[second.x][second.y]
@@ -106,6 +111,12 @@ func fall_piece(grid_src: Vector2, grid_dest: Vector2):
 	all_pieces[grid_src.x][grid_src.y].fall_to(pos, fall_time, fall_delay)
 	all_pieces[grid_dest.x][grid_dest.y] = all_pieces[grid_src.x][grid_src.y]
 	all_pieces[grid_src.x][grid_src.y] = null
+
+
+func fall_new_piece(piece, grid_dest: Vector2):
+	var pos = grid_to_pixel(grid_dest.x, grid_dest.y)
+	piece.fall_to(pos, fall_time, fall_delay)
+	all_pieces[grid_dest.x][grid_dest.y] = piece
 
 
 func set_selection(new_selection):
@@ -127,7 +138,7 @@ func is_inside_grid(col, row):
 
 
 func selection_input():
-	if Input.is_action_just_pressed("select"):
+	if Input.is_action_just_pressed("select") && not swapping && not falling:
 		var pos = get_global_mouse_position()
 		var grid_pos = pixel_to_grid(pos.x, pos.y)
 		
@@ -172,8 +183,11 @@ func score_matches() -> bool:
 			board.remove_child(all_pieces[pos.x][pos.y])
 			all_pieces[pos.x][pos.y] = null
 			deleted_pos.append(pos)
-	refill_board(deleted_pos)
-	return deleted_pos.size() > 0
+
+	if deleted_pos.size() > 0:
+		refill_board(deleted_pos)
+		return true
+	return false
 
 
 func refill_board(deleted_pos: PoolVector2Array):
@@ -185,6 +199,15 @@ func refill_board(deleted_pos: PoolVector2Array):
 			else:
 				if count_empty > 0:
 					fall_piece(Vector2(i, j), Vector2(i, j - count_empty))
+		
+		for j in count_empty:
+			var rand = floor(rand_range(0, pieces.size()))
+			var piece = pieces[rand].instance()
+			board.add_child(piece)
+			piece.position = grid_to_pixel(i, height + j)
+			fall_new_piece(piece, Vector2(i, height + j - count_empty))
+	fall_timer.start(fall_time + fall_delay)
+	falling = true
 
 
 func _process(delta):
@@ -192,5 +215,11 @@ func _process(delta):
 
 
 func _on_SwapTimer_timeout():
+	swapping = false
 	if not score_matches():
 		swap_pieces(swap_last, swap_first, false)
+
+
+func _on_FallTimer_timeout():
+	falling = false	
+	score_matches()

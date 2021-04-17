@@ -17,3 +17,6 @@ offset = 70
 
 [node name="SwapTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="FallTimer" type="Timer" parent="."]
+one_shot = true
