@@ -11,3 +11,6 @@ y_start = 600
 offset = 64
 
 [node name="PipeContainer" type="Node2D" parent="."]
+
+[node name="RotationTimer" type="Timer" parent="."]
+one_shot = true

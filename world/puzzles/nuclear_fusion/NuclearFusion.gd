@@ -1,10 +1,10 @@
 extends Node2D
 
-export (int) var width;
-export (int) var height;
-export (int) var x_start;
-export (int) var y_start;
-export (int) var offset;
+export (int) var width
+export (int) var height
+export (int) var x_start
+export (int) var y_start
+export (int) var offset
 
 export (float) var swap_time = 0.25
 export (float) var fall_time = 0.5

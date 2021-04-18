@@ -12,6 +12,8 @@ atlas = ExtResource( 2 )
 region = Rect2( 0, 64, 64, 64 )
 
 [node name="LinePipe" instance=ExtResource( 1 )]
+connect_up = true
+connect_down = true
 
 [node name="Disconnected" type="Sprite" parent="." index="0"]
 texture = SubResource( 1 )

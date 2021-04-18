@@ -12,6 +12,8 @@ atlas = ExtResource( 2 )
 region = Rect2( 256, 64, 64, 64 )
 
 [node name="Cooler" instance=ExtResource( 1 )]
+connect_down = true
+is_cooler = true
 
 [node name="Disconnected" type="Sprite" parent="." index="0"]
 texture = SubResource( 1 )

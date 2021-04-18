@@ -12,6 +12,9 @@ atlas = ExtResource( 2 )
 region = Rect2( 64, 64, 64, 64 )
 
 [node name="TeePipe" instance=ExtResource( 1 )]
+connect_up = true
+connect_down = true
+connect_left = true
 
 [node name="Disconnected" type="Sprite" parent="." index="0"]
 texture = SubResource( 1 )
