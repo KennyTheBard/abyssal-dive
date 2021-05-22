@@ -8,9 +8,20 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Node2D",
+"class": "Gate",
+"language": "GDScript",
+"path": "res://world/puzzles/logic_circuit/gates/Gate.gd"
+}, {
+"base": "Node2D",
+"class": "GateInput",
+"language": "GDScript",
+"path": "res://world/puzzles/logic_circuit/gates/GateInput.gd"
+} ]
 _global_script_class_icons={
-
+"Gate": "",
+"GateInput": ""
 }
 
 [application]
