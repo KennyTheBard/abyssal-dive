@@ -18,10 +18,16 @@ _global_script_classes=[ {
 "class": "GateInput",
 "language": "GDScript",
 "path": "res://world/puzzles/logic_circuit/gates/GateInput.gd"
+}, {
+"base": "Node2D",
+"class": "Wire",
+"language": "GDScript",
+"path": "res://world/puzzles/logic_circuit/gates/Wire.gd"
 } ]
 _global_script_class_icons={
 "Gate": "",
-"GateInput": ""
+"GateInput": "",
+"Wire": ""
 }
 
 [application]
