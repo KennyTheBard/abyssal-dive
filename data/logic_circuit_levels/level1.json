@@ -1,0 +1,40 @@
+{
+   "expected_output": "1101",
+   "data": [
+      {
+         "type": "output",
+         "position": {
+            "x": 100,
+            "y": 100
+         }
+      },
+      {
+         "type": "output",
+         "position": {
+            "x": 200,
+            "y": 100
+         }
+      },
+      {
+         "type": "and",
+         "position": {
+            "x": 100,
+            "y": 100
+         }
+      },
+      {
+         "type": "or",
+         "position": {
+            "x": 100,
+            "y": 100
+         }
+      },
+      {
+         "type": "dup",
+         "position": {
+            "x": 100,
+            "y": 100
+         }
+      }
+   ]
+}

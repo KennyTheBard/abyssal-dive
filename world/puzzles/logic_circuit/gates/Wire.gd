@@ -6,27 +6,41 @@ signal status_changed(new_status)
 export (NodePath) var src_path
 var src = null
 
+export (NodePath) var dst_path
+var dst = null
+
 onready var line: Line2D = $Line
-onready var start: Position2D = $Start
-onready var end: Position2D = $End
+onready var start: Vector2 = Vector2()
+onready var end: Vector2 = Vector2()
 
 var activated: bool = false setget set_activated
 
 
 func _ready():
-	src = get_node(src_path)
+	# check for the start and end point
+	if has_node(src_path):
+		src = get_node(src_path)
+		start = src.global_position
+		activated = src.activated
+		src.connect("status_changed", self, "_on_source_status_changed")
+	if has_node(dst_path):
+		dst = get_node(dst_path)
+		end = dst.global_position
 	
-	activated = src.activated
-	src.connect("status_changed", self, "_on_source_status_changed")
-	src.connect("deactivated", self, "_on_source_deactivated")
-	
+	# draw wire
 	draw_wire()
 
 
 func draw_wire():
 	line.clear_points()
-	line.add_point(start.position)
-	line.add_point(end.position)
+	line.add_point(start)
+	
+	# add middle points
+	for c in get_children():
+		if c is Position2D:
+			line.add_point(c.global_position)
+	
+	line.add_point(end)
 
 
 func set_activated(new_activated: bool):
@@ -35,6 +49,7 @@ func set_activated(new_activated: bool):
 
 
 func _on_source_status_changed(new_activated):
-	activated = new_activated
+	set_activated(new_activated)
+
 
 
