@@ -1,10 +1,10 @@
 extends Node2D
 
-onready var noise = $Noise
+onready var input = $Input
 onready var p1 = $Pattern1
 onready var p2 = $Pattern2
 onready var p3 = $Pattern3
-onready var result = $Result
+onready var output = $Output
 
 
 func _ready():

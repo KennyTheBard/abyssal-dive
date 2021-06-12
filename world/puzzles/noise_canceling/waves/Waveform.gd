@@ -17,7 +17,7 @@ onready var label : Label = $ValueLabel
 onready var up_button : TextureButton = $UpFqButton
 onready var down_button : TextureButton = $DownFqButton
 
-var points = []
+var values = []
 var wave = Wave.Zero
 
 
@@ -54,12 +54,12 @@ func get_wave_value(delta: float) -> float:
 
 
 func compute_waveform():
-	points.clear()
+	values.clear()
 	line.clear_points()
 	for i in num_points:
 		var delta = i / float(num_points)
 		var value = get_wave_value(delta)
-		points.append(value)
+		values.append(value)
 		line.add_point(Vector2(lerp(0, width, i / float(num_points)), lerp(0, amplitude, value)))
 
 
