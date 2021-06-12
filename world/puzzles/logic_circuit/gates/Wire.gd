@@ -3,10 +3,7 @@ class_name Wire
 
 signal status_changed(new_status)
 
-export (NodePath) var src_path
 var src = null
-
-export (NodePath) var dst_path
 var dst = null
 
 onready var line: Line2D = $Line
@@ -16,18 +13,12 @@ onready var end: Vector2 = Vector2()
 var activated: bool = false setget set_activated
 
 
-func _ready():
-	# check for the start and end point
-	if has_node(src_path):
-		src = get_node(src_path)
-		start = src.global_position
-		activated = src.activated
-		src.connect("status_changed", self, "_on_source_status_changed")
-	if has_node(dst_path):
-		dst = get_node(dst_path)
-		end = dst.global_position
+func init():
+	start = src.global_position
+	end = dst.global_position
+	activated = src.activated
+	src.connect("status_changed", self, "_on_source_status_changed")
 	
-	# draw wire
 	draw_wire()
 
 

@@ -1,40 +1,91 @@
 {
    "expected_output": "1101",
-   "data": [
+   "gates": [
       {
-         "type": "output",
+         "type": "out",
          "position": {
-            "x": 100,
-            "y": 100
+            "x": 150,
+            "y": 25
          }
       },
       {
-         "type": "output",
+         "type": "out",
          "position": {
-            "x": 200,
-            "y": 100
+            "x": 300,
+            "y": 25
          }
       },
       {
          "type": "and",
          "position": {
             "x": 100,
-            "y": 100
+            "y": 200
          }
       },
       {
          "type": "or",
          "position": {
-            "x": 100,
-            "y": 100
+            "x": 350,
+            "y": 200
          }
       },
       {
          "type": "dup",
          "position": {
-            "x": 100,
-            "y": 100
+            "x": 225,
+            "y": 250
          }
+      },
+      {
+         "type": "in",
+         "position": {
+            "x": 100,
+            "y": 350
+         }
+      },
+      {
+         "type": "in",
+         "position": {
+            "x": 225,
+            "y": 350
+         }
+      },
+      {
+         "type": "in",
+         "position": {
+            "x": 350,
+            "y": 350
+         }
+      }
+   ],
+   "wires": [
+      {
+         "src": 5,
+         "dst": 2
+      },
+      {
+         "src": 2,
+         "dst": 0
+      },
+      {
+         "src": 6,
+         "dst": 4
+      },
+      {
+         "src": 4,
+         "dst": 2
+      },
+      {
+         "src": 4,
+         "dst": 3
+      },
+      {
+         "src": 7,
+         "dst": 3
+      },
+      {
+         "src": 3,
+         "dst": 1
       }
    ]
 }

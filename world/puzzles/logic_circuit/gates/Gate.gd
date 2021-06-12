@@ -3,20 +3,13 @@ class_name Gate
 
 signal status_changed(new_status)
 
-export (NodePath) var input_1_path
-var input_1: Wire = null
-
-export (NodePath) var input_2_path
-var input_2: Wire = null
-
-export (NodePath) var input_3_path
-var input_3: Wire = null
-
-export (NodePath) var input_4_path
-var input_4: Wire = null
-
 onready var logic: Node = $Logic
 onready var label: Label = $Label
+
+var input_1: Wire = null
+var input_2: Wire = null
+var input_3: Wire = null
+var input_4: Wire = null
 
 var i1: bool = false
 var i2: bool = false
@@ -26,28 +19,36 @@ var i4: bool = false
 var activated: bool = false setget set_activated
 
 
-func _ready():
-	if has_node(input_1_path):
-		input_1 = get_node(input_1_path)
+func init():
+	if input_1 != null:
 		i1 = input_1.activated
 		input_1.connect("status_changed", self, "_on_i1_status_changed")
 	
-	if has_node(input_2_path):
-		input_2 = get_node(input_2_path)
+	if input_2 != null:
 		i2 = input_2.activated
 		input_2.connect("status_changed", self, "_on_i2_status_changed")
 	
-	if has_node(input_3_path):
-		input_3 = get_node(input_3_path)
+	if input_3 != null:
 		i3 = input_3.activated
 		input_3.connect("status_changed", self, "_on_i3_status_changed")
 	
-	if has_node(input_4_path):
-		input_4 = get_node(input_4_path)
+	if input_4 != null:
 		i4 = input_4.activated
 		input_4.connect("status_changed", self, "_on_i4_status_changed")
 	
 	updateLabelColor()
+
+
+func getFirstFreeInput():
+	if input_1 == null:
+		return "input_1"
+	if input_2 == null:
+		return "input_2"
+	if input_3 == null:
+		return "input_3"
+	if input_4 == null:
+		return "input_4"
+	return null
 
 
 func updateLabelColor():

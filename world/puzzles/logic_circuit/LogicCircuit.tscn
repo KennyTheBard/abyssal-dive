@@ -1,58 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://world/puzzles/logic_circuit/LogicCircuit.gd" type="Script" id=1]
-[ext_resource path="res://world/puzzles/logic_circuit/gates/Wire.tscn" type="PackedScene" id=2]
-[ext_resource path="res://world/puzzles/logic_circuit/gates/Output.tscn" type="PackedScene" id=3]
-[ext_resource path="res://world/puzzles/logic_circuit/gates/Switch.tscn" type="PackedScene" id=4]
-[ext_resource path="res://world/puzzles/logic_circuit/gates/AndGate.tscn" type="PackedScene" id=5]
 
 [node name="LogicCircuit" type="Node2D"]
 script = ExtResource( 1 )
 
-[node name="Wire" parent="." instance=ExtResource( 2 )]
-position = Vector2( -1.52588e-05, 1.10805 )
-src_path = NodePath("../Switch")
-dst_path = NodePath("../AndGate")
+[node name="Wires" type="Node" parent="."]
 
-[node name="Position2D" type="Position2D" parent="Wire"]
-position = Vector2( 305.098, 294.183 )
-
-[node name="Position2D2" type="Position2D" parent="Wire"]
-position = Vector2( 377.726, 292.786 )
-
-[node name="Position2D3" type="Position2D" parent="Wire"]
-position = Vector2( 375.63, 235.522 )
-
-[node name="Wire2" parent="." instance=ExtResource( 2 )]
-position = Vector2( -1.52588e-05, 1.10805 )
-src_path = NodePath("../Switch2")
-dst_path = NodePath("../AndGate")
-
-[node name="Position2D" type="Position2D" parent="Wire2"]
-position = Vector2( 469.208, 291.389 )
-
-[node name="Position2D2" type="Position2D" parent="Wire2"]
-position = Vector2( 403.564, 292.786 )
-
-[node name="Position2D3" type="Position2D" parent="Wire2"]
-position = Vector2( 398.676, 237.617 )
-
-[node name="Wire3" parent="." instance=ExtResource( 2 )]
-position = Vector2( -1.52588e-05, 1.10805 )
-src_path = NodePath("../AndGate")
-dst_path = NodePath("../Output")
-
-[node name="AndGate" parent="." instance=ExtResource( 5 )]
-position = Vector2( 387.577, 233.943 )
-input_1_path = NodePath("../Wire")
-input_2_path = NodePath("../Wire2")
-
-[node name="Switch" parent="." instance=ExtResource( 4 )]
-position = Vector2( 305.817, 386.704 )
-
-[node name="Switch2" parent="." instance=ExtResource( 4 )]
-position = Vector2( 474.815, 386.005 )
-
-[node name="Output" parent="." instance=ExtResource( 3 )]
-position = Vector2( 388.245, 102.655 )
-input_1_path = NodePath("../Wire3")
+[node name="Gates" type="Node" parent="."]

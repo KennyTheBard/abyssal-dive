@@ -13,7 +13,7 @@ func apply(i1: bool, i2: bool, i3: bool, i4: bool) -> bool:
 
 func _on_Area2D_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
-		parent.activated = !parent.activated
+		parent.activated = not parent.activated
 		updateSwitchLabel(parent.activated)
 
 
