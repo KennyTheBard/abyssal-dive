@@ -10,6 +10,7 @@ var gates_scene_dict = {
 	"out": preload("res://world/puzzles/logic_circuit/gates/Output.tscn"),
 	"and": preload("res://world/puzzles/logic_circuit/gates/AndGate.tscn"),
 	"or": preload("res://world/puzzles/logic_circuit/gates/OrGate.tscn"),
+	"xor": preload("res://world/puzzles/logic_circuit/gates/XorGate.tscn"),
 	"dup": preload("res://world/puzzles/logic_circuit/gates/Duplicator.tscn"),
 	"not": preload("res://world/puzzles/logic_circuit/gates/Inverter.tscn")
 }

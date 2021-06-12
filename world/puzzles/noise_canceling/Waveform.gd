@@ -3,25 +3,36 @@ extends Node2D
 enum Wave {
 	Zero = 0,
 	Sin = 1,
-	Step = 2
+	Cos = 2,
+	Square = 3
 }
 
 export (int) var num_points = 512
 export (float) var width = 640
-export (float) var amlitude = 250
+export (float) var amplitude = 35
 export (int) var fq = 2 setget set_fq
 
 onready var line : Line2D = $Line2D
+onready var label : Label = $ValueLabel
+onready var up_button : TextureButton = $UpFqButton
+onready var down_button : TextureButton = $DownFqButton
 
 var points = []
 var wave = Wave.Zero
 
+
 func _ready():
-	set_fq(4)
+	$UpFqButton.connect("pressed", self, "_raise_fq")
+	$DownFqButton.connect("pressed", self, "_lower_fq")
+	
+	set_wave(Wave.Zero)
 
 
 func set_fq(new_fq: int):
 	fq = new_fq
+	label.text = str(fq)
+	up_button.disabled = fq == 16
+	down_button.disabled = fq == 1
 	compute_waveform()
 
 
@@ -34,8 +45,10 @@ func get_wave_value(delta: float) -> float:
 	match wave:
 		Wave.Sin:
 			return fn_sin(delta)
-		Wave.Step:
-			return fn_step(delta)
+		Wave.Cos:
+			return fn_cos(delta)
+		Wave.Square:
+			return fn_square(delta)
 		_:
 			return fn_zero(delta)
 
@@ -47,30 +60,30 @@ func compute_waveform():
 		var delta = i / float(num_points)
 		var value = get_wave_value(delta)
 		points.append(value)
-		line.add_point(Vector2(lerp(0, width, i / float(num_points)), lerp(0, amlitude, value)))
+		line.add_point(Vector2(lerp(0, width, i / float(num_points)), lerp(0, amplitude, value)))
 
 
-# Wave function
+func fn_zero(d: float) -> float:
+	return 0.0
+
+
 func fn_sin(d: float) -> float:
 	return sin(lerp(0, 2 * PI * fq, d))
 
 
-# Step function
-func fn_step(d: float) -> float:
-	var sin_value = sin(lerp(0, 2 * PI * fq, d))
-	if sin_value > 0.0:
-		return 1.0
-	else:
-		return -1.0
+func fn_cos(d: float) -> float:
+	return cos(lerp(0, 2 * PI * fq, d))
 
 
-# Zero function
-func fn_zero(d: float) -> float:
-	return 0.0
+func fn_square(d: float):
+	return sign(sin(2 * PI * d * fq))
 
-# Step functions
-#func fn_spike(d: float):
-#	var new_d = d * fq
-#	var min_i = floor(new_d)
-#	var max_i = ceil(new_d)
-#	if new_d - min_i <= 0.25 && new_d - min_i > 0.75:
+
+func _raise_fq():
+	if fq < 16:
+		set_fq(fq * 2)
+
+
+func _lower_fq():
+	if fq > 1:
+		set_fq(fq / 2)

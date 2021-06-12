@@ -8,6 +8,6 @@ onready var result = $Result
 
 
 func _ready():
-	p1.set_wave(int(floor(rand_range(1, 3))))
-	p2.set_wave(int(floor(rand_range(1, 3))))
-	p3.set_wave(int(floor(rand_range(1, 3))))
+	p1.set_wave(1)
+	p2.set_wave(2)
+	p3.set_wave(3)
