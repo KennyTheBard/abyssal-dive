@@ -120,7 +120,7 @@ func update_heat(grid_pos: Vector2):
 
 func selection_input():
 	if Input.is_action_just_pressed("select") && not rotating:
-		var pos = get_global_mouse_position()
+		var pos = get_local_mouse_position()
 		var grid_pos = pixel_to_grid(pos.x, pos.y)
 		
 		if is_inside_grid(grid_pos.x, grid_pos.y):

@@ -1,36 +1,44 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://world/puzzles/cooling_system/CoolingSystem.tscn" type="PackedScene" id=2]
+[ext_resource path="res://world/Panel.gd" type="Script" id=3]
+[ext_resource path="res://world/puzzles/nuclear_fusion/NuclearFusion.tscn" type="PackedScene" id=4]
 
 [node name="Panel" type="Node2D"]
+script = ExtResource( 3 )
 
-[node name="MainScreen" type="Control" parent="."]
-margin_left = 14.9641
-margin_top = 10.883
-margin_right = 651.964
-margin_bottom = 439.883
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="MSContainer" type="ViewportContainer" parent="MainScreen"]
-margin_left = 2.54626
-margin_top = 1.25275
-margin_right = 649.546
-margin_bottom = 435.253
+[node name="MSContainer" type="ViewportContainer" parent="."]
+margin_left = 18.0
+margin_top = 12.0
+margin_right = 650.0
+margin_bottom = 501.0
 stretch = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MainScreen" type="Viewport" parent="MainScreen/MSContainer"]
-size = Vector2( 647, 434 )
+[node name="MainScreen" type="Viewport" parent="MSContainer"]
+size = Vector2( 632, 489 )
 handle_input_locally = false
 render_target_update_mode = 3
 
-[node name="ScreenBg" type="TextureRect" parent="MainScreen/MSContainer/MainScreen"]
-margin_right = 647.0
-margin_bottom = 434.0
-texture = ExtResource( 1 )
-expand = true
-stretch_mode = 2
+[node name="NuclearFusion" parent="MSContainer/MainScreen" instance=ExtResource( 4 )]
+scale = Vector2( 0.7, 0.7 )
+
+[node name="SSContainer" type="ViewportContainer" parent="."]
+margin_left = 668.0
+margin_top = 343.338
+margin_right = 1001.0
+margin_bottom = 574.338
+stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SecondaryScreen" type="Viewport" parent="SSContainer"]
+size = Vector2( 333, 231 )
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="CoolingSystem" parent="SSContainer/SecondaryScreen" instance=ExtResource( 2 )]
+scale = Vector2( 0.4, 0.4 )

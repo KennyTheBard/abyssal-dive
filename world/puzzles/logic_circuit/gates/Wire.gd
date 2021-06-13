@@ -14,8 +14,8 @@ var activated: bool = false setget set_activated
 
 
 func init():
-	start = src.global_position
-	end = dst.global_position
+	start = src.position
+	end = dst.position
 	activated = src.activated
 	src.connect("status_changed", self, "_on_source_status_changed")
 	
