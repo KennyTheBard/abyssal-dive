@@ -1,0 +1,56 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/sprites/signal/SignalWaveformTexture.png" type="Texture" id=1]
+[ext_resource path="res://world/puzzles/noise_canceling/waves/Grid.gd" type="Script" id=2]
+
+[node name="Grid" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PoolVector2Array( 0, -100, 100, -100, 100, 100, 0, 100, 0, -100 )
+width = 4.0
+default_color = Color( 0, 0.501961, 0, 1 )
+texture = ExtResource( 1 )
+texture_mode = 1
+
+[node name="Line2D5" type="Line2D" parent="."]
+points = PoolVector2Array( 0, 0, 100, 0 )
+width = 2.0
+default_color = Color( 0, 0.501961, 0, 1 )
+texture = ExtResource( 1 )
+texture_mode = 1
+
+[node name="Line2D6" type="Line2D" parent="."]
+points = PoolVector2Array( 50, -100, 50, 100 )
+width = 2.0
+default_color = Color( 0, 0.501961, 0, 1 )
+texture = ExtResource( 1 )
+texture_mode = 1
+
+[node name="Line2D8" type="Line2D" parent="."]
+points = PoolVector2Array( 0, -50, 100, -50 )
+width = 1.0
+default_color = Color( 0, 0.501961, 0, 1 )
+texture = ExtResource( 1 )
+texture_mode = 1
+
+[node name="Line2D7" type="Line2D" parent="."]
+points = PoolVector2Array( 25, -100, 25, 100 )
+width = 1.0
+default_color = Color( 0, 0.501961, 0, 1 )
+texture = ExtResource( 1 )
+texture_mode = 1
+
+[node name="Line2D10" type="Line2D" parent="."]
+points = PoolVector2Array( 0, 50, 100, 50 )
+width = 1.0
+default_color = Color( 0, 0.501961, 0, 1 )
+texture = ExtResource( 1 )
+texture_mode = 1
+
+[node name="Line2D9" type="Line2D" parent="."]
+points = PoolVector2Array( 75, -100, 75, 100 )
+width = 1.0
+default_color = Color( 0, 0.501961, 0, 1 )
+texture = ExtResource( 1 )
+texture_mode = 1
