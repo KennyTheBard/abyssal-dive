@@ -1,5 +1,7 @@
 extends Node2D
 
+signal match_complete
+
 const line_texture = preload("res://assets/sprites/signal/SignalWaveformTexture.png")
 
 export (int) var num_points = 512
@@ -29,7 +31,7 @@ func compute_waveform():
 		c.queue_free()
 	
 	# draw the segments
-	var correct_segment = false
+	var correct_segment = abs(values[0] - correct_values[0]) < 0.05
 	var line = create_line(correct_segment)
 	for i in num_points:
 		var delta = i / float(num_points)
@@ -41,6 +43,9 @@ func compute_waveform():
 			correct_segment = !correct_segment
 			line = create_line(correct_segment)
 			line.add_point(point)
+	
+	if correct_segment == true && linesContainer.get_child_count() == 1:
+		emit_signal("match_complete")
 
 
 func create_line(correct: bool):

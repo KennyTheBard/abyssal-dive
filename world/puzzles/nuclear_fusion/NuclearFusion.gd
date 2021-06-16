@@ -1,5 +1,7 @@
 extends Node2D
 
+signal scored_points
+
 export (int) var width
 export (int) var height
 export (int) var x_start
@@ -186,6 +188,7 @@ func score_matches() -> bool:
 
 	if deleted_pos.size() > 0:
 		refill_board(deleted_pos)
+		emit_signal("scored_points")
 		return true
 	return false
 
@@ -221,5 +224,5 @@ func _on_SwapTimer_timeout():
 
 
 func _on_FallTimer_timeout():
-	falling = false	
+	falling = false
 	score_matches()

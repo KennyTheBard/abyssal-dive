@@ -1,5 +1,7 @@
 extends Node2D
 
+signal rotated_pipe
+
 export (int) var width
 export (int) var height
 export (int) var x_start
@@ -87,6 +89,7 @@ func is_inside_grid(col, row):
 func rotate_pipe(grid_pos: Vector2):
 	board[grid_pos.x][grid_pos.y].rotate_pipe(90, rotate_time)
 	rotation_timer.start(rotate_time)
+	emit_signal("rotated_pipe")
 
 
 func update_heat(grid_pos: Vector2):

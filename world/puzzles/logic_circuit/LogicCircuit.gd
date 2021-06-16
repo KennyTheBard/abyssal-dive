@@ -1,5 +1,7 @@
 extends Node2D
 
+signal completed
+
 const levels_directory_path = "res://data/logic_circuit_levels"
 
 onready var gates: Node = $Gates
@@ -16,6 +18,7 @@ var gates_scene_dict = {
 }
 
 var wire_scene = preload("res://world/puzzles/logic_circuit/gates/Wire.tscn")
+var outputs = []
 
 
 func _ready():
@@ -27,6 +30,7 @@ func _ready():
 func buildLevel(data: Dictionary):
 	# instantiate gates
 	var gates_list = []
+	outputs.empty()
 	for g in data.get("gates"):
 		var gate_scene: PackedScene = gates_scene_dict.get(g.get("type"))
 		var instance: Gate = gate_scene.instance()
@@ -37,6 +41,8 @@ func buildLevel(data: Dictionary):
 		instance.name = "Gate" + str(gates_list.size())
 		
 		gates_list.push_back(instance)
+		if g.get("type") == "out":
+			outputs.push_back(instance)
 	
 	# instantiate wires
 	var wires_list = []
@@ -65,6 +71,10 @@ func buildLevel(data: Dictionary):
 		w.init()
 	for g in gates_list:
 		g.init()
+	
+	# connect signal from outputs to master control
+	for o in outputs:
+		o.connect("status_changed", self, "_on_output_status_change")
 
 
 func loadLevelData():
@@ -89,3 +99,14 @@ func chooseRandomLevel():
 	else:
 		push_error("Levels data directory is missing for logic circuit minigame")
 	return levels_directory_path + "/" + level_paths[int(rand_range(0, level_paths.size()))]
+
+
+func _on_output_status_change(status):
+	if outputs.empty():
+		return
+	
+	for o in outputs:
+		if not o.activated:
+			return
+	
+	emit_signal("completed")

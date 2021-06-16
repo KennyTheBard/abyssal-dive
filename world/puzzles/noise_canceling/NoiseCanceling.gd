@@ -1,5 +1,7 @@
 extends Node2D
 
+signal completed
+
 onready var input = $Input
 onready var p1 = $Pattern1
 onready var p2 = $Pattern2
@@ -12,8 +14,8 @@ func _ready():
 	p2.set_wave(randi() % 4 + 1)
 	p3.set_wave(randi() % 4 + 1)
 	
-	var correct_values = calculate_values(randi() % p1.max_fq + 1, randi() % p1.max_fq + 1, randi() % p1.max_fq + 1)
-#	var correct_values = calculate_values(2, 3, 4)
+#	var correct_values = calculate_values(randi() % p1.max_fq + 1, randi() % p1.max_fq + 1, randi() % p1.max_fq + 1)
+	var correct_values = calculate_values(2, 3, 4)
 	input.values = correct_values
 	output.correct_values = correct_values
 	
@@ -47,3 +49,7 @@ func calculate_values(fq1: float, fq2: float, fq3: float):
 		var value = (value1 + value2 + value3) / 3
 		values.append(value)
 	return values
+
+
+func _on_Output_match_complete():
+	emit_signal("completed")

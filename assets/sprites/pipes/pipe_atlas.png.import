@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/pipe_atlas.png-9c0bd1425a90d544a7db7e62675f3c76.stex"
+path="res://.import/pipe_atlas.png-55651ea28583d2c2563f1dc5def76a0f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/pipe_atlas.png"
-dest_files=[ "res://.import/pipe_atlas.png-9c0bd1425a90d544a7db7e62675f3c76.stex" ]
+source_file="res://assets/sprites/pipes/pipe_atlas.png"
+dest_files=[ "res://.import/pipe_atlas.png-55651ea28583d2c2563f1dc5def76a0f.stex" ]
 
 [params]
 

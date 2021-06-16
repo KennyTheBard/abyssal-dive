@@ -22,3 +22,4 @@ position = Vector2( 80, 400 )
 
 [node name="Output" parent="." instance=ExtResource( 4 )]
 position = Vector2( 80, 500 )
+[connection signal="match_complete" from="Output" to="." method="_on_Output_match_complete"]
